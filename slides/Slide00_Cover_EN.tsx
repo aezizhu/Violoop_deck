@@ -197,10 +197,10 @@ const Slide00_Cover: React.FC<Slide00Props> = ({ onNext }) => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4, duration: 0.8 }}
+          transition={{ delay: 0.4, duration: 0.8, ease: "easeInOut" }}
           className="mb-6"
         >
-          <h1 className="text-6xl md:text-8xl font-black tracking-tight">
+          <h1 className="text-5xl md:text-8xl font-black tracking-tight">
             <span className="text-white">VIOLO</span>
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500">O</span>
             <span className="text-white">P</span>
@@ -211,9 +211,9 @@ const Slide00_Cover: React.FC<Slide00Props> = ({ onNext }) => {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.7, duration: 0.8 }}
+          transition={{ delay: 0.7, duration: 0.8, ease: "easeInOut" }}
         >
-          <h2 className="text-2xl md:text-3xl font-light text-zinc-300 mb-4 tracking-wide">
+          <h2 className="text-xl md:text-3xl font-light text-zinc-300 mb-4 tracking-wide">
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-zinc-200 to-green-400 font-medium">The Third Interface</span>
           </h2>
           <p className="text-zinc-500 text-sm md:text-lg tracking-widest uppercase font-light">
@@ -225,7 +225,7 @@ const Slide00_Cover: React.FC<Slide00Props> = ({ onNext }) => {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.8 }}
+          transition={{ delay: 1.2, duration: 0.8, ease: "easeInOut" }}
           className="mt-12 flex items-center justify-center gap-3 flex-wrap"
         >
           <div className="flex items-center gap-2 px-3 py-1.5 bg-zinc-900/50 border border-zinc-800 rounded-full">
@@ -249,7 +249,7 @@ const Slide00_Cover: React.FC<Slide00Props> = ({ onNext }) => {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.5, duration: 0.8 }}
+        transition={{ delay: 1.5, duration: 0.8, ease: "easeInOut" }}
         className="absolute bottom-8 left-0 right-0 flex justify-center z-10"
       >
         <div className="flex items-center gap-4 text-zinc-600 text-xs font-mono">
@@ -265,7 +265,7 @@ const Slide00_Cover: React.FC<Slide00Props> = ({ onNext }) => {
       <motion.button
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 1.8, duration: 0.8 }}
+        transition={{ delay: 1.8, duration: 0.8, ease: "easeInOut" }}
         onClick={onNext}
         className="absolute bottom-16 left-1/2 -translate-x-1/2 z-10 group cursor-pointer"
       >

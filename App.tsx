@@ -199,7 +199,7 @@ const App: React.FC = () => {
     };
   }, [nextSlide, prevSlide, isAuthenticated]);
 
-  const CurrentSlideComponent = slides[currentSlide].component;
+
 
   const slideVariants = {
     enter: (direction: number) => ({
@@ -229,7 +229,8 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className="w-screen h-screen bg-black overflow-hidden relative font-sans">
+    <div className="w-screen h-[100dvh] bg-black overflow-hidden relative font-sans">
+      {/* Slide Container */}
       {/* Slide Container */}
       <AnimatePresence mode="wait" custom={direction}>
         <motion.div
@@ -240,40 +241,8 @@ const App: React.FC = () => {
           animate="center"
           exit="exit"
           transition={{
-            x: { type: 'spring', stiffness: 300, damping: 30 },
-            opacity: { duration: 0.2 },
-          }}
-          className="absolute inset-0"
-        >
-          {currentSlide === 0 ? (
-            <Slide00_Cover_CN onNext={nextSlide} /> // Using CN component for both as it accepts props, but we should probably use the correct one
-          ) : (
-            <CurrentSlideComponent />
-          )}
-        </motion.div>
-      </AnimatePresence>
-
-      {/* Special handling for Cover slide to ensure props are passed if needed */}
-      {/* Actually, let's fix the render logic above to be generic */}
-      <div className="hidden">
-        {/* This is just to ensure the logic above is correct. 
-            The map below renders the component from the array. 
-            If Slide00 needs props, we need to cloneElement or pass them.
-        */}
-      </div>
-
-      {/* Re-rendering the slide container correctly */}
-      <AnimatePresence mode="wait" custom={direction}>
-        <motion.div
-          key={`${language}-${currentSlide}`}
-          custom={direction}
-          variants={slideVariants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{
-            x: { type: 'spring', stiffness: 300, damping: 30 },
-            opacity: { duration: 0.2 },
+            x: { type: 'tween', ease: 'easeInOut', duration: 0.5 },
+            opacity: { duration: 0.3 },
           }}
           className="absolute inset-0"
         >
@@ -282,6 +251,8 @@ const App: React.FC = () => {
           })}
         </motion.div>
       </AnimatePresence>
+
+
 
 
       {/* Navigation Controls - with auto-hide */}

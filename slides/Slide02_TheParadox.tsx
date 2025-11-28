@@ -5,7 +5,7 @@ import { SlideHeader } from '../components/SlideHeader';
 
 const Slide02_TheParadox: React.FC = () => {
   return (
-    <div className="w-full h-full flex flex-col relative px-4 md:px-8">
+    <div className="w-full h-full flex flex-col relative px-4 md:px-8 overflow-y-auto md:overflow-hidden">
       {/* Header */}
       <SlideHeader chapter={1} titleEn="The Paradox" titleZh="悖论" badge="PROBLEM" />
 

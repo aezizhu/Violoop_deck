@@ -25,6 +25,7 @@ const Slide11_Roadmap: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, ease: "easeInOut" }}
               className="relative mb-2"
             >
               <div className="h-14 md:h-20 bg-gradient-to-r from-blue-500/20 via-blue-500/30 to-blue-500/20 rounded-t-2xl md:rounded-t-3xl border border-blue-500/30 flex items-center justify-between px-4 md:px-6">
@@ -40,7 +41,7 @@ const Slide11_Roadmap: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.15 }}
+              transition={{ delay: 0.15, duration: 0.6, ease: "easeInOut" }}
               className="relative mb-2 mx-4 md:mx-6"
             >
               <div className="h-14 md:h-20 bg-gradient-to-r from-teal-500/20 via-teal-500/30 to-teal-500/20 border border-teal-500/30 flex items-center justify-between px-4 md:px-6">
@@ -56,7 +57,7 @@ const Slide11_Roadmap: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.3 }}
+              transition={{ delay: 0.3, duration: 0.6, ease: "easeInOut" }}
               className="relative mx-8 md:mx-12"
             >
               <div className="h-14 md:h-20 bg-gradient-to-r from-green-500/30 via-green-500/50 to-green-500/30 rounded-b-2xl md:rounded-b-3xl border border-green-500/50 flex items-center justify-between px-4 md:px-5 shadow-[0_0_40px_rgba(34,197,94,0.2)]">
@@ -99,12 +100,12 @@ const Slide11_Roadmap: React.FC = () => {
           </div>
 
           {/* Horizontal Revenue Stages */}
-          <div className="grid grid-cols-3 gap-2 md:gap-4 mb-4 md:mb-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 mb-4 md:mb-6 overflow-y-auto max-h-[40vh] md:max-h-none pr-2 md:pr-0">
             {/* Stage 1: Hardware */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
+              transition={{ delay: 0.2, duration: 0.6, ease: "easeInOut" }}
               className="bg-zinc-900 border border-zinc-800 rounded-xl p-2 md:p-4 hover:border-blue-500/50 transition-colors group"
             >
               <div className="flex items-center gap-1 md:gap-2 mb-2 md:mb-3">
@@ -125,7 +126,7 @@ const Slide11_Roadmap: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.35 }}
+              transition={{ delay: 0.35, duration: 0.6, ease: "easeInOut" }}
               className="bg-zinc-900 border border-zinc-800 rounded-xl p-2 md:p-4 hover:border-green-500/50 transition-colors group"
             >
               <div className="flex items-center gap-1 md:gap-2 mb-2 md:mb-3">
@@ -146,7 +147,7 @@ const Slide11_Roadmap: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
+              transition={{ delay: 0.5, duration: 0.6, ease: "easeInOut" }}
               className="bg-zinc-900 border border-zinc-800 rounded-xl p-2 md:p-4 hover:border-purple-500/50 transition-colors group"
             >
               <div className="flex items-center gap-1 md:gap-2 mb-2 md:mb-3">
@@ -168,7 +169,7 @@ const Slide11_Roadmap: React.FC = () => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
+            transition={{ delay: 0.7, duration: 0.6, ease: "easeInOut" }}
             className="bg-gradient-to-r from-zinc-900 via-zinc-900 to-transparent border border-zinc-800 rounded-xl p-3 md:p-4"
           >
             <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-2">

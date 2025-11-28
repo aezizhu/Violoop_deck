@@ -37,7 +37,7 @@ const Slide04_HardwareFailure: React.FC = () => {
       </div>
 
       {/* Main Visual - Device Theater */}
-      <div className="flex-1 flex items-center md:justify-center relative z-[5] overflow-y-auto py-4 md:py-0">
+      <div className="flex-1 flex items-start md:items-center md:justify-center relative z-[5] overflow-y-auto py-4 md:py-0">
         <div className="relative w-full max-w-5xl flex flex-col md:flex-row items-center md:items-end justify-center gap-6 md:gap-8">
 
           {/* DESKTOP - Left - Chinese */}

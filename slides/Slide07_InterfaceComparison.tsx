@@ -135,7 +135,7 @@ const Slide07_InterfaceComparison: React.FC = () => {
   const colors = colorClasses[current.color];
 
   return (
-    <div className="w-full h-full flex flex-col relative overflow-hidden">
+    <div className="w-full h-full flex flex-col relative overflow-y-auto md:overflow-hidden px-4 md:px-8">
       {/* Particle Background */}
       <ParticleBackground opacity={0.35} particleCount={900} colorScheme="blue-green" />
 
@@ -151,199 +151,199 @@ const Slide07_InterfaceComparison: React.FC = () => {
       {/* Main Content */}
       <div className="flex-1 flex justify-center px-4 z-10 overflow-hidden">
         <div className="w-full max-w-5xl flex flex-col md:flex-row gap-4 md:gap-6">
-        {/* LEFT: Layer Stack Visualization */}
-        <div className="flex-1 flex flex-col justify-center max-w-md">
-          <div className="relative">
-            {/* Stack Layers */}
-            {layers.map((layer, i) => {
-              const layerColors = colorClasses[layer.color];
-              const isActive = activeLayer === i;
+          {/* LEFT: Layer Stack Visualization */}
+          <div className="flex-1 flex flex-col justify-center max-w-md">
+            <div className="relative">
+              {/* Stack Layers */}
+              {layers.map((layer, i) => {
+                const layerColors = colorClasses[layer.color];
+                const isActive = activeLayer === i;
 
-              return (
-                <motion.div
-                  key={layer.id}
-                  onClick={() => setActiveLayer(i)}
-                  className="relative cursor-pointer transition-all duration-300 mb-2 md:mb-3"
-                  animate={{
-                    x: isActive ? 16 : 0,
-                    scale: isActive ? 1.02 : 1
-                  }}
-                >
-                  <div className={`p-3 md:p-4 rounded-xl border-2 transition-all duration-300 ${isActive ? `${layerColors.border} ${layerColors.glow} bg-zinc-900` : 'border-zinc-800 bg-zinc-950'}`}>
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2 md:gap-3">
-                        <div className={`w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center ${isActive ? layerColors.bg : 'bg-zinc-800'}`}>
-                          <Icon name={layer.icon} size={16} className={isActive ? 'text-black' : 'text-zinc-500'} />
+                return (
+                  <motion.div
+                    key={layer.id}
+                    onClick={() => setActiveLayer(i)}
+                    className="relative cursor-pointer transition-all duration-300 mb-2 md:mb-3"
+                    animate={{
+                      x: isActive ? 16 : 0,
+                      scale: isActive ? 1.02 : 1
+                    }}
+                  >
+                    <div className={`p-3 md:p-4 rounded-xl border-2 transition-all duration-300 ${isActive ? `${layerColors.border} ${layerColors.glow} bg-zinc-900` : 'border-zinc-800 bg-zinc-950'}`}>
+                      <div className="flex items-center justify-between mb-2">
+                        <div className="flex items-center gap-2 md:gap-3">
+                          <div className={`w-8 h-8 md:w-10 md:h-10 rounded-lg flex items-center justify-center ${isActive ? layerColors.bg : 'bg-zinc-800'}`}>
+                            <Icon name={layer.icon} size={16} className={isActive ? 'text-black' : 'text-zinc-500'} />
+                          </div>
+                          <div>
+                            <div className={`text-sm md:text-base font-bold ${isActive ? 'text-white' : 'text-zinc-500'}`}>{layer.name}</div>
+                            <div className={`text-xs ${isActive ? layerColors.text : 'text-zinc-600'}`}>{layer.subtitle}</div>
+                          </div>
                         </div>
-                        <div>
-                          <div className={`text-sm md:text-base font-bold ${isActive ? 'text-white' : 'text-zinc-500'}`}>{layer.name}</div>
-                          <div className={`text-xs ${isActive ? layerColors.text : 'text-zinc-600'}`}>{layer.subtitle}</div>
-                        </div>
+                        <div className={`text-xl md:text-2xl font-black ${isActive ? layerColors.text : 'text-zinc-700'}`}>{layer.coverage}</div>
                       </div>
-                      <div className={`text-xl md:text-2xl font-black ${isActive ? layerColors.text : 'text-zinc-700'}`}>{layer.coverage}</div>
+
+                      {/* Progress bar showing coverage */}
+                      <div className="h-1 md:h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                        <motion.div
+                          className={`h-full rounded-full ${layerColors.bg}`}
+                          initial={{ width: 0 }}
+                          animate={{ width: layer.coverage }}
+                          transition={{ duration: 0.5 }}
+                        />
+                      </div>
                     </div>
 
-                    {/* Progress bar showing coverage */}
-                    <div className="h-1 md:h-1.5 bg-zinc-800 rounded-full overflow-hidden">
+                    {/* Active indicator */}
+                    {isActive && (
                       <motion.div
-                        className={`h-full rounded-full ${layerColors.bg}`}
-                        initial={{ width: 0 }}
-                        animate={{ width: layer.coverage }}
-                        transition={{ duration: 0.5 }}
+                        layoutId="activeLayerIndicator"
+                        className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 w-1 h-10 md:h-12 rounded-full ${layerColors.bg}`}
                       />
-                    </div>
-                  </div>
-
-                  {/* Active indicator */}
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeLayerIndicator"
-                      className={`absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 w-1 h-10 md:h-12 rounded-full ${layerColors.bg}`}
-                    />
-                  )}
-                </motion.div>
-              );
-            })}
-          </div>
-
-          {/* Fallback Chain indicator - Chinese */}
-          <div className="flex items-center justify-center gap-2 mt-3 md:mt-4 text-zinc-600">
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-zinc-700 to-transparent" />
-            <div className="flex items-center gap-1.5 px-3 py-1 bg-zinc-900/50 border border-zinc-800 rounded-full">
-              <Icon name="chevronRight" size={12} className="rotate-90" />
-              <span className="text-[10px] font-mono">回退链</span>
+                    )}
+                  </motion.div>
+                );
+              })}
             </div>
-            <div className="h-px flex-1 bg-gradient-to-r from-transparent via-zinc-700 to-transparent" />
-          </div>
 
-          {/* Key insight - Chinese */}
-          <div className="mt-4 md:mt-6 p-3 md:p-4 bg-zinc-900/50 border border-zinc-800 rounded-xl">
-            <div className="flex items-start gap-3">
-              <div className="p-2 bg-green-500/10 rounded-lg shrink-0">
-                <Icon name="zap" size={16} className="text-green-400" />
+            {/* Fallback Chain indicator - Chinese */}
+            <div className="flex items-center justify-center gap-2 mt-3 md:mt-4 text-zinc-600">
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-zinc-700 to-transparent" />
+              <div className="flex items-center gap-1.5 px-3 py-1 bg-zinc-900/50 border border-zinc-800 rounded-full">
+                <Icon name="chevronRight" size={12} className="rotate-90" />
+                <span className="text-[10px] font-mono">回退链</span>
               </div>
-              <div>
-                <div className="text-sm font-bold text-white mb-1">语义封装器</div>
-                <div className="text-xs text-zinc-400">
-                  我们将每个 GUI 应用转化为 API。开发者无需修改任何代码。
+              <div className="h-px flex-1 bg-gradient-to-r from-transparent via-zinc-700 to-transparent" />
+            </div>
+
+            {/* Key insight - Chinese */}
+            <div className="mt-4 md:mt-6 p-3 md:p-4 bg-zinc-900/50 border border-zinc-800 rounded-xl">
+              <div className="flex items-start gap-3">
+                <div className="p-2 bg-green-500/10 rounded-lg shrink-0">
+                  <Icon name="zap" size={16} className="text-green-400" />
+                </div>
+                <div>
+                  <div className="text-sm font-bold text-white mb-1">语义封装器</div>
+                  <div className="text-xs text-zinc-400">
+                    我们将每个 GUI 应用转化为 API。开发者无需修改任何代码。
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* RIGHT: Layer Details - Chinese */}
-        <div className="flex-1 flex flex-col max-w-lg">
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={current.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className="flex-1 flex flex-col"
-            >
-              {/* Visual Demo */}
-              <div className={`flex-1 min-h-[200px] md:min-h-0 bg-zinc-900 border ${colors.border}/30 rounded-2xl overflow-hidden ${colors.glow}`}>
-                <div className="h-full p-3 md:p-4 flex flex-col">
-                  {/* Layer Visual */}
-                  <div className="flex-1 bg-black/50 rounded-xl relative overflow-hidden flex items-center justify-center min-h-[120px]">
-                    {current.visual === 'cli' && <CLIVisual />}
+          {/* RIGHT: Layer Details - Chinese */}
+          <div className="flex-1 flex flex-col max-w-lg">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="flex-1 flex flex-col"
+              >
+                {/* Visual Demo */}
+                <div className={`flex-1 min-h-[200px] md:min-h-0 bg-zinc-900 border ${colors.border}/30 rounded-2xl overflow-hidden ${colors.glow}`}>
+                  <div className="h-full p-3 md:p-4 flex flex-col">
+                    {/* Layer Visual */}
+                    <div className="flex-1 bg-black/50 rounded-xl relative overflow-hidden flex items-center justify-center min-h-[120px]">
+                      {current.visual === 'cli' && <CLIVisual />}
 
-                    {current.visual === 'tree' && (
-                      <div className="relative w-full h-full flex items-center justify-center">
-                        <div className="absolute inset-0 bg-[linear-gradient(rgba(34,197,94,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(34,197,94,0.03)_1px,transparent_1px)] bg-[size:16px_16px]" />
+                      {current.visual === 'tree' && (
+                        <div className="relative w-full h-full flex items-center justify-center">
+                          <div className="absolute inset-0 bg-[linear-gradient(rgba(34,197,94,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(34,197,94,0.03)_1px,transparent_1px)] bg-[size:16px_16px]" />
 
-                        {/* Tree structure */}
-                        <div className="flex flex-col items-center scale-90 md:scale-100">
-                          <div className="px-3 py-1.5 bg-green-950 border border-green-500 rounded text-green-400 font-mono text-xs">AX应用程序</div>
-                          <div className="w-px h-4 bg-green-500/30" />
-                          <div className="flex gap-4">
-                            <div className="flex flex-col items-center">
-                              <div className="px-2 py-1 bg-green-900/30 border border-green-500/30 rounded text-green-400/60 font-mono text-[10px]">AX窗口</div>
-                              <div className="w-px h-3 bg-green-500/30" />
-                              <div className="flex gap-2">
-                                <div className="px-2 py-1 bg-green-900/20 border border-green-500/20 rounded text-green-400/40 font-mono text-[10px]">AX菜单</div>
-                                <motion.div
-                                  className="px-2 py-1 bg-green-500 text-black font-mono text-[10px] font-bold rounded"
-                                  animate={{ scale: [1, 1.05, 1] }}
-                                  transition={{ duration: 1.5, repeat: Infinity }}
-                                >
-                                  AX按钮
-                                </motion.div>
+                          {/* Tree structure */}
+                          <div className="flex flex-col items-center scale-90 md:scale-100">
+                            <div className="px-3 py-1.5 bg-green-950 border border-green-500 rounded text-green-400 font-mono text-xs">AX应用程序</div>
+                            <div className="w-px h-4 bg-green-500/30" />
+                            <div className="flex gap-4">
+                              <div className="flex flex-col items-center">
+                                <div className="px-2 py-1 bg-green-900/30 border border-green-500/30 rounded text-green-400/60 font-mono text-[10px]">AX窗口</div>
+                                <div className="w-px h-3 bg-green-500/30" />
+                                <div className="flex gap-2">
+                                  <div className="px-2 py-1 bg-green-900/20 border border-green-500/20 rounded text-green-400/40 font-mono text-[10px]">AX菜单</div>
+                                  <motion.div
+                                    className="px-2 py-1 bg-green-500 text-black font-mono text-[10px] font-bold rounded"
+                                    animate={{ scale: [1, 1.05, 1] }}
+                                    transition={{ duration: 1.5, repeat: Infinity }}
+                                  >
+                                    AX按钮
+                                  </motion.div>
+                                </div>
                               </div>
                             </div>
                           </div>
+
+                          <motion.div
+                            className="absolute bottom-4 right-4 text-green-400 text-xs"
+                            animate={{ opacity: [0.5, 1, 0.5] }}
+                            transition={{ duration: 1, repeat: Infinity }}
+                          >
+                            语义访问 ⚡
+                          </motion.div>
                         </div>
+                      )}
 
-                        <motion.div
-                          className="absolute bottom-4 right-4 text-green-400 text-xs"
-                          animate={{ opacity: [0.5, 1, 0.5] }}
-                          transition={{ duration: 1, repeat: Infinity }}
-                        >
-                          语义访问 ⚡
-                        </motion.div>
-                      </div>
-                    )}
-
-                    {current.visual === 'vision' && (
-                      <div className="relative w-full h-full">
-                        <div className="absolute inset-4 bg-zinc-800 rounded-lg overflow-hidden">
-                          {/* Blurry screenshot representation */}
-                          <div className="w-full h-full bg-gradient-to-br from-zinc-700 to-zinc-900 flex items-center justify-center">
-                            <motion.div
-                              className="w-14 h-14 md:w-16 md:h-16 border-2 border-yellow-500 rounded-lg flex items-center justify-center"
-                              animate={{
-                                x: [-20, 20, -10, 15, 0],
-                                y: [-10, 15, -15, 10, 0]
-                              }}
-                              transition={{ duration: 4, repeat: Infinity }}
-                            >
-                              <Icon name="scanEye" size={20} className="text-yellow-400" />
-                            </motion.div>
+                      {current.visual === 'vision' && (
+                        <div className="relative w-full h-full">
+                          <div className="absolute inset-4 bg-zinc-800 rounded-lg overflow-hidden">
+                            {/* Blurry screenshot representation */}
+                            <div className="w-full h-full bg-gradient-to-br from-zinc-700 to-zinc-900 flex items-center justify-center">
+                              <motion.div
+                                className="w-14 h-14 md:w-16 md:h-16 border-2 border-yellow-500 rounded-lg flex items-center justify-center"
+                                animate={{
+                                  x: [-20, 20, -10, 15, 0],
+                                  y: [-10, 15, -15, 10, 0]
+                                }}
+                                transition={{ duration: 4, repeat: Infinity }}
+                              >
+                                <Icon name="scanEye" size={20} className="text-yellow-400" />
+                              </motion.div>
+                            </div>
                           </div>
+
+                          <motion.div
+                            className="absolute bottom-4 right-4 text-yellow-400 text-xs"
+                            animate={{ opacity: [0.5, 1, 0.5] }}
+                            transition={{ duration: 1, repeat: Infinity }}
+                          >
+                            视觉回退 🔍
+                          </motion.div>
                         </div>
+                      )}
+                    </div>
 
-                        <motion.div
-                          className="absolute bottom-4 right-4 text-yellow-400 text-xs"
-                          animate={{ opacity: [0.5, 1, 0.5] }}
-                          transition={{ duration: 1, repeat: Infinity }}
-                        >
-                          视觉回退 🔍
-                        </motion.div>
+                    {/* Description - Chinese */}
+                    <div className="mt-3 md:mt-4">
+                      <p className={`text-xs md:text-sm ${colors.text} mb-2 md:mb-3`}>{current.description}</p>
+                      <div className="flex flex-wrap gap-1.5 md:gap-2">
+                        {current.examples.map((ex, i) => (
+                          <span key={i} className="px-2 py-1 bg-zinc-800 rounded text-[9px] md:text-[10px] text-zinc-400 font-mono">{ex}</span>
+                        ))}
                       </div>
-                    )}
-                  </div>
-
-                  {/* Description - Chinese */}
-                  <div className="mt-3 md:mt-4">
-                    <p className={`text-xs md:text-sm ${colors.text} mb-2 md:mb-3`}>{current.description}</p>
-                    <div className="flex flex-wrap gap-1.5 md:gap-2">
-                      {current.examples.map((ex, i) => (
-                        <span key={i} className="px-2 py-1 bg-zinc-800 rounded text-[9px] md:text-[10px] text-zinc-400 font-mono">{ex}</span>
-                      ))}
                     </div>
                   </div>
                 </div>
-              </div>
 
-              {/* Stats - Chinese */}
-              <div className="grid grid-cols-3 gap-2 md:gap-3 mt-3 md:mt-4">
-                <div className={`p-2 md:p-3 rounded-xl border ${colors.border}/30 bg-zinc-900/50`}>
-                  <div className="text-[9px] md:text-[10px] text-zinc-500 uppercase mb-1">准确率</div>
-                  <div className={`text-lg md:text-xl font-black ${colors.text}`}>{current.accuracy}</div>
+                {/* Stats - Chinese */}
+                <div className="grid grid-cols-3 gap-2 md:gap-3 mt-3 md:mt-4">
+                  <div className={`p-2 md:p-3 rounded-xl border ${colors.border}/30 bg-zinc-900/50`}>
+                    <div className="text-[9px] md:text-[10px] text-zinc-500 uppercase mb-1">准确率</div>
+                    <div className={`text-lg md:text-xl font-black ${colors.text}`}>{current.accuracy}</div>
+                  </div>
+                  <div className={`p-2 md:p-3 rounded-xl border ${colors.border}/30 bg-zinc-900/50`}>
+                    <div className="text-[9px] md:text-[10px] text-zinc-500 uppercase mb-1">延迟</div>
+                    <div className={`text-lg md:text-xl font-black ${colors.text}`}>{current.latency}</div>
+                  </div>
+                  <div className={`p-2 md:p-3 rounded-xl border ${colors.border}/30 bg-zinc-900/50`}>
+                    <div className="text-[9px] md:text-[10px] text-zinc-500 uppercase mb-1">覆盖率</div>
+                    <div className={`text-lg md:text-xl font-black ${colors.text}`}>{current.coverage}</div>
+                  </div>
                 </div>
-                <div className={`p-2 md:p-3 rounded-xl border ${colors.border}/30 bg-zinc-900/50`}>
-                  <div className="text-[9px] md:text-[10px] text-zinc-500 uppercase mb-1">延迟</div>
-                  <div className={`text-lg md:text-xl font-black ${colors.text}`}>{current.latency}</div>
-                </div>
-                <div className={`p-2 md:p-3 rounded-xl border ${colors.border}/30 bg-zinc-900/50`}>
-                  <div className="text-[9px] md:text-[10px] text-zinc-500 uppercase mb-1">覆盖率</div>
-                  <div className={`text-lg md:text-xl font-black ${colors.text}`}>{current.coverage}</div>
-                </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
-        </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
 

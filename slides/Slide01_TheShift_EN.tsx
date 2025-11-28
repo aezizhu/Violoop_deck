@@ -80,20 +80,20 @@ const Slide01_TheShift: React.FC = () => {
 
           {/* Glow filter */}
           <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+            <feGaussianBlur stdDeviation="4" result="coloredBlur" />
             <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
 
           {/* Strong glow for particles */}
           <filter id="particleGlow" x="-100%" y="-100%" width="300%" height="300%">
-            <feGaussianBlur stdDeviation="6" result="coloredBlur"/>
+            <feGaussianBlur stdDeviation="6" result="coloredBlur" />
             <feMerge>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="coloredBlur"/>
-              <feMergeNode in="SourceGraphic"/>
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="coloredBlur" />
+              <feMergeNode in="SourceGraphic" />
             </feMerge>
           </filter>
         </defs>
@@ -146,7 +146,7 @@ const Slide01_TheShift: React.FC = () => {
       </svg>
 
       {/* Three Era Cards */}
-      <div className="relative z-[5] flex flex-col md:flex-row justify-between items-center md:items-end px-4 md:px-8 h-auto md:h-[70vh] gap-4 md:gap-0 py-8 md:py-0">
+      <div className="relative z-[5] flex flex-col md:flex-row justify-start md:justify-between items-center md:items-end px-4 md:px-8 h-full md:h-[70vh] gap-4 md:gap-0 py-8 md:py-0 overflow-y-auto md:overflow-visible">
         {/* Software 1.0 - Bottom Left */}
         <motion.div
           initial={{ opacity: 0, y: 50 }}

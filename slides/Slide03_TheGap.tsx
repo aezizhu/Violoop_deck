@@ -55,7 +55,7 @@ const Slide03_TheGap: React.FC = () => {
   ];
 
   return (
-    <div className="w-full h-full flex flex-col relative overflow-hidden px-4 md:px-8">
+    <div className="w-full h-full flex flex-col relative overflow-y-auto md:overflow-hidden px-4 md:px-8">
       {/* Header */}
       <SlideHeader chapter={1} titleEn="The Gap" titleZh="鸿沟" badge="PROBLEM" />
 
@@ -143,10 +143,10 @@ const Slide03_TheGap: React.FC = () => {
               })}
               <defs>
                 <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                  <feGaussianBlur stdDeviation="2" result="coloredBlur" />
                   <feMerge>
-                    <feMergeNode in="coloredBlur"/>
-                    <feMergeNode in="SourceGraphic"/>
+                    <feMergeNode in="coloredBlur" />
+                    <feMergeNode in="SourceGraphic" />
                   </feMerge>
                 </filter>
               </defs>
@@ -226,8 +226,8 @@ const Slide03_TheGap: React.FC = () => {
           {/* Human Framing Quote - Chinese */}
           <div className="bg-zinc-900/50 border border-zinc-800 rounded-xl p-4">
             <p className="text-zinc-300 text-sm leading-relaxed italic">
-              "我们已经变成了<span className="text-red-400 font-semibold">人肉中间件</span>——<br/>
-              复制、粘贴、切换标签页，<br/>
+              "我们已经变成了<span className="text-red-400 font-semibold">人肉中间件</span>——<br />
+              复制、粘贴、切换标签页，<br />
               为我们的AI做翻译。"
             </p>
           </div>

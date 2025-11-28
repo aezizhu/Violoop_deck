@@ -20,7 +20,7 @@ export const LoginPage: React.FC<LoginPageProps> = ({ onLogin }) => {
     };
 
     return (
-        <div className="w-screen h-screen bg-black flex flex-col items-center justify-center relative overflow-hidden font-sans">
+        <div className="w-screen h-[100dvh] bg-black flex flex-col items-center justify-center relative overflow-hidden font-sans">
             {/* Background Effects */}
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(20,20,20,1)_0%,rgba(0,0,0,1)_100%)]" />
             <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20" />

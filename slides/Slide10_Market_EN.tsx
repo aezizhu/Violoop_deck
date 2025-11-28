@@ -110,7 +110,7 @@ const Slide10_Market: React.FC = () => {
               className="h-full bg-gradient-to-r from-green-500 via-teal-500 to-blue-500"
               initial={{ width: '0%' }}
               animate={{ width: `${(activePhase + 1) * 33.33}%` }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
             />
           </div>
 
@@ -129,12 +129,13 @@ const Slide10_Market: React.FC = () => {
                   onMouseEnter={() => setIsHovering(i)}
                   onMouseLeave={() => setIsHovering(null)}
                   animate={{ y: isActive ? -8 : 0 }}
-                  transition={{ duration: 0.3 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
                 >
                   {/* Node */}
                   <motion.div
                     className={`w-[80px] h-[80px] md:w-[120px] md:h-[120px] rounded-xl md:rounded-2xl flex flex-col items-center justify-center transition-all duration-300 ${isActive ? `${colors.bg} ${colors.glow}` : isPast ? 'bg-zinc-800' : 'bg-zinc-900 border-2 border-zinc-800'}`}
                     animate={{ scale: isActive ? 1.05 : 1 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     <Icon name={phase.icon} size={24} className={`${isActive ? 'text-black' : isPast ? 'text-zinc-500' : 'text-zinc-600'} md:hidden`} />
                     <Icon name={phase.icon} size={32} className={`${isActive ? 'text-black' : isPast ? 'text-zinc-500' : 'text-zinc-600'} hidden md:block`} />
@@ -148,6 +149,7 @@ const Slide10_Market: React.FC = () => {
                   <motion.div
                     className={`mt-3 md:mt-4 w-full max-w-[180px] md:max-w-[280px] p-2 md:p-4 rounded-xl transition-all duration-300 ${isActive ? `bg-zinc-900 border ${colors.border}/50 ${colors.glow}` : 'bg-zinc-900/50 border border-zinc-800'}`}
                     animate={{ opacity: isActive ? 1 : 0.6 }}
+                    transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
                     {/* Header */}
                     <div className="flex items-center justify-between mb-1 md:mb-2">

@@ -23,7 +23,7 @@ const Slide14_Appendix: React.FC = () => {
   const violoop = { name: "Violoop Lite & Pro", image: "🎯", price: "$99 & $299", sales: "目标 $200万+", ai: true, wifi: true, bios: true, resolution: "最高 4K@60FPS" };
 
   return (
-    <div className="w-full h-full flex flex-col relative overflow-hidden">
+    <div className="w-full h-full flex flex-col relative overflow-y-auto md:overflow-hidden px-4 md:px-8">
       {/* Background */}
       <div className="absolute inset-0 z-0">
         <div className="absolute inset-0 bg-black" />

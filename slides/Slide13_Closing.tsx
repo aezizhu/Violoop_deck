@@ -6,7 +6,7 @@ import { VioloopDevice } from '../components/VioloopDevice';
 
 const Slide13_Closing: React.FC = () => {
   return (
-    <div className="w-full h-full flex flex-col justify-center items-center relative overflow-hidden bg-black">
+    <div className="w-full h-full flex flex-col justify-center items-center relative overflow-y-auto md:overflow-hidden bg-black">
       {/* Particle Background */}
       <ParticleBackground opacity={0.7} particleCount={1500} colorScheme="green-white" />
 

@@ -85,7 +85,7 @@ const Slide06_ProductDeepDive: React.FC = () => {
   const colors = colorMap[current.color];
 
   return (
-    <div className="w-full h-full flex flex-col relative overflow-hidden">
+    <div className="w-full h-full flex flex-col relative overflow-y-auto md:overflow-hidden px-4 md:px-8">
       {/* Header */}
       <SlideHeader chapter={2} titleEn="Product Deep Dive" titleZh="产品深度" badge="PRODUCT" />
 
