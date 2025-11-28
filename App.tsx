@@ -275,7 +275,7 @@ const App: React.FC = () => {
             </div>
 
             {/* Top Right Controls: Slide Counter + Language Switcher */}
-            <div className="absolute top-4 right-4 z-50 flex items-center gap-3">
+            <div className="absolute top-2 right-2 md:top-4 md:right-4 z-50 flex items-center gap-2 md:gap-3 scale-90 md:scale-100 origin-top-right">
               {/* Language Switcher */}
               <button
                 onClick={toggleLanguage}

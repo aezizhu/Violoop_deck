@@ -64,8 +64,8 @@ export const ParticleBackground: React.FC<ParticleBackgroundProps> = ({
     const colors = colorSchemes[colorScheme];
 
     const CONFIG = {
-      particleCount,
-      particleSize: 2,
+      particleCount: window.innerWidth < 768 ? Math.min(particleCount, 50) : particleCount,
+      particleSize: window.innerWidth < 768 ? 1.5 : 2,
       speed: 0.15,
       rotationSpeed: 0.0005,
       colorCore: colors.core,

@@ -11,7 +11,7 @@ interface SlideHeaderProps {
 export const SlideHeader: React.FC<SlideHeaderProps> = ({ chapter, titleEn, titleZh, badge }) => {
   return (
     <motion.div
-      className="w-full px-6 md:px-8 pt-4 md:pt-6 pb-3 z-20"
+      className="w-full px-6 md:px-8 pt-16 md:pt-6 pb-3 z-20"
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}

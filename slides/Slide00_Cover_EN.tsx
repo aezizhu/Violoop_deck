@@ -187,7 +187,7 @@ const Slide00_Cover: React.FC<Slide00Props> = ({ onNext }) => {
       <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px] z-[1]" />
 
       {/* Main Content */}
-      <div className="relative z-10 text-center max-w-4xl px-8">
+      <div className="relative z-10 text-center max-w-4xl px-8 pt-20 md:pt-0">
         {/* 3D Device */}
         <div className="mb-6 flex justify-center">
           <VioloopDevice scale={0.75} />
