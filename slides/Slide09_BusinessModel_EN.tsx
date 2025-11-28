@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Icon } from '../components/Icon';
-import { ParticleBackground } from '../components/ParticleBackground';
 import { SlideHeader } from '../components/SlideHeader';
 
 interface Step {
@@ -40,7 +39,7 @@ const Slide09_BusinessModel: React.FC = () => {
   return (
     <div className="w-full h-full flex flex-col relative overflow-y-auto md:overflow-hidden px-4 md:px-8">
       {/* Particle Background */}
-      <ParticleBackground opacity={0.35} particleCount={900} colorScheme="purple-green" />
+
 
       {/* Header */}
       <SlideHeader chapter={3} titleEn="Business Model" titleZh="商业模式" badge="BUSINESS" />

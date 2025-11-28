@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
-import * as THREE from 'three';
 import { Icon } from '../components/Icon';
 import { VioloopDevice } from '../components/VioloopDevice';
 
@@ -8,177 +7,14 @@ interface Slide00Props {
   onNext?: () => void;
 }
 
-interface ParticleData {
-  velocity: {
-    x: number;
-    y: number;
-    z: number;
-  };
-}
+
 
 const Slide00_Cover: React.FC<Slide00Props> = ({ onNext }) => {
-  const canvasRef = useRef<HTMLDivElement>(null);
 
-  // Three.js Particle Animation
-  useEffect(() => {
-    if (!canvasRef.current) return;
-
-    const container = canvasRef.current;
-    let scene: THREE.Scene;
-    let camera: THREE.PerspectiveCamera;
-    let renderer: THREE.WebGLRenderer;
-    let particleSystem: THREE.Points;
-    const particlesData: ParticleData[] = [];
-    let animationId: number;
-    let isInitialized = false;
-
-    const CONFIG = {
-      particleCount: 2000,
-      particleSize: 2.5,
-      speed: 0.2,
-      rotationSpeed: 0.0008,
-      colorCore: { r: 0.66, g: 0.33, b: 0.97 }, // Purple
-      colorEdge: { r: 0.13, g: 0.77, b: 0.37 }  // Green
-    };
-
-    // Delay initialization to ensure container has dimensions
-    const initTimeout = setTimeout(() => {
-      if (!isInitialized) {
-        initThree();
-      }
-    }, 100);
-
-    function initThree() {
-      if (isInitialized) return;
-      isInitialized = true;
-
-      const width = container.clientWidth || window.innerWidth;
-      const height = container.clientHeight || window.innerHeight;
-
-      scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x000000, 0.0008);
-
-      camera = new THREE.PerspectiveCamera(75, width / height, 1, 2000);
-      camera.position.z = 1000;
-
-      renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.setSize(width, height);
-      renderer.setClearColor(0x000000, 0);
-      container.appendChild(renderer.domElement);
-
-      createParticles();
-      animate();
-    }
-
-    function createParticles() {
-      const geometry = new THREE.BufferGeometry();
-      const positions: number[] = [];
-      const colors: number[] = [];
-
-      for (let i = 0; i < CONFIG.particleCount; i++) {
-        const x = (Math.random() - 0.5) * 2000;
-        const y = (Math.random() - 0.5) * 2000;
-        const z = (Math.random() - 0.5) * 2000;
-        positions.push(x, y, z);
-
-        particlesData.push({
-          velocity: {
-            x: (Math.random() - 0.5) * CONFIG.speed,
-            y: (Math.random() - 0.5) * CONFIG.speed,
-            z: Math.random() * CONFIG.speed * 2 + 0.5
-          }
-        });
-        colors.push(1, 1, 1);
-      }
-
-      geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
-      geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
-
-      const material = new THREE.PointsMaterial({
-        size: CONFIG.particleSize,
-        vertexColors: true,
-        blending: THREE.AdditiveBlending,
-        transparent: true,
-        opacity: 0.8,
-        depthTest: false
-      });
-
-      particleSystem = new THREE.Points(geometry, material);
-      scene.add(particleSystem);
-    }
-
-    function animate() {
-      animationId = requestAnimationFrame(animate);
-
-      if (!particleSystem) return;
-
-      const positions = particleSystem.geometry.attributes.position.array as Float32Array;
-      const colors = particleSystem.geometry.attributes.color.array as Float32Array;
-
-      particleSystem.rotation.x += CONFIG.rotationSpeed * 0.3;
-      particleSystem.rotation.y += CONFIG.rotationSpeed;
-
-      for (let i = 0; i < CONFIG.particleCount; i++) {
-        const i3 = i * 3;
-        let z = positions[i3 + 2];
-
-        z += particlesData[i].velocity.z;
-        positions[i3] += particlesData[i].velocity.x;
-        positions[i3 + 1] += particlesData[i].velocity.y;
-
-        if (z > 1000 || z < -1500) {
-          z = -1500 + Math.random() * 500;
-          positions[i3] = (Math.random() - 0.5) * 200;
-          positions[i3 + 1] = (Math.random() - 0.5) * 200;
-        }
-        positions[i3 + 2] = z;
-
-        // Color gradient: purple (far) to green (near)
-        let depth = (z + 1500) / 2500;
-        depth = Math.max(0, Math.min(1, depth));
-
-        const r = CONFIG.colorCore.r + (CONFIG.colorEdge.r - CONFIG.colorCore.r) * depth;
-        const g = CONFIG.colorCore.g + (CONFIG.colorEdge.g - CONFIG.colorCore.g) * depth;
-        const b = CONFIG.colorCore.b + (CONFIG.colorEdge.b - CONFIG.colorCore.b) * depth;
-
-        const fade = z > 600 ? 1 - ((z - 600) / 400) : 1;
-        colors[i3] = r * fade;
-        colors[i3 + 1] = g * fade;
-        colors[i3 + 2] = b * fade;
-      }
-
-      particleSystem.geometry.attributes.position.needsUpdate = true;
-      particleSystem.geometry.attributes.color.needsUpdate = true;
-      renderer.render(scene, camera);
-    }
-
-    const handleResize = () => {
-      if (!camera || !renderer) return;
-      const width = container.clientWidth || window.innerWidth;
-      const height = container.clientHeight || window.innerHeight;
-      camera.aspect = width / height;
-      camera.updateProjectionMatrix();
-      renderer.setSize(width, height);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      clearTimeout(initTimeout);
-      window.removeEventListener('resize', handleResize);
-      if (animationId) cancelAnimationFrame(animationId);
-      if (renderer && renderer.domElement && container.contains(renderer.domElement)) {
-        container.removeChild(renderer.domElement);
-        renderer.dispose();
-      }
-    };
-  }, []);
 
   return (
     <div className="w-full h-full flex flex-col justify-center items-center relative overflow-hidden bg-black">
-      {/* Three.js Particle Canvas */}
-      <div ref={canvasRef} className="absolute inset-0 z-0" style={{ width: '100%', height: '100%', minHeight: '100vh' }} />
+
 
       {/* Radial gradient overlay */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,rgba(0,0,0,0.3)_50%,rgba(0,0,0,0.7)_100%)] z-[1]" />
@@ -250,7 +86,7 @@ const Slide00_Cover: React.FC<Slide00Props> = ({ onNext }) => {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.5, duration: 0.8, ease: "easeInOut" }}
-        className="absolute bottom-8 left-0 right-0 flex justify-center z-10"
+        className="absolute bottom-20 left-0 right-0 flex justify-center z-10"
       >
         <div className="flex items-center gap-4 text-zinc-600 text-xs font-mono">
           <span>BVIO INC.</span>
@@ -267,7 +103,7 @@ const Slide00_Cover: React.FC<Slide00Props> = ({ onNext }) => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1.8, duration: 0.8, ease: "easeInOut" }}
         onClick={onNext}
-        className="absolute bottom-16 left-1/2 -translate-x-1/2 z-10 group cursor-pointer"
+        className="absolute bottom-28 left-1/2 -translate-x-1/2 z-10 group cursor-pointer"
       >
         <div className="flex flex-col items-center gap-3">
           <span className="text-zinc-500 text-xs uppercase tracking-widest group-hover:text-zinc-300 transition-colors">

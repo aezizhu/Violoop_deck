@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Icon } from '../components/Icon';
-import { ParticleBackground } from '../components/ParticleBackground';
 import { SlideHeader } from '../components/SlideHeader';
 
 interface Phase {
@@ -85,7 +84,7 @@ const Slide10_Market: React.FC = () => {
   return (
     <div className="w-full h-full flex flex-col relative overflow-hidden">
       {/* Particle Background */}
-      <ParticleBackground opacity={0.35} particleCount={900} colorScheme="blue-green" />
+
 
       {/* Header */}
       <SlideHeader chapter={3} titleEn="Master Plan" titleZh="总体规划" badge="BUSINESS" />

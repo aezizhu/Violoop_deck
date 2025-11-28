@@ -1,14 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Icon } from '../components/Icon';
-import { ParticleBackground } from '../components/ParticleBackground';
 import { VioloopDevice } from '../components/VioloopDevice';
 
 const Slide13_Closing: React.FC = () => {
   return (
     <div className="w-full h-full flex flex-col justify-center items-center relative overflow-y-auto md:overflow-hidden bg-black">
-      {/* Particle Background */}
-      <ParticleBackground opacity={0.7} particleCount={1500} colorScheme="green-white" />
 
       {/* Radial gradient overlay - green tinted - reduced opacity to show particles */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(34,197,94,0.08)_0%,transparent_50%,rgba(0,0,0,0.3)_100%)] z-[1]" />

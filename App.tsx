@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Icon } from './components/Icon';
 import { LoginPage } from './components/LoginPage';
+import { ParticleBackground } from './components/ParticleBackground';
 
 // Import English slides
 import Slide00_Cover_EN from './slides/Slide00_Cover_EN';
@@ -228,8 +229,31 @@ const App: React.FC = () => {
     return <LoginPage onLogin={() => setIsAuthenticated(true)} />;
   }
 
+  const getSlideConfig = (index: number) => {
+    switch (index) {
+      case 0: return { colorScheme: 'purple-green', opacity: 0.4, particleCount: 1000 };
+      case 1: return { colorScheme: 'purple-green', opacity: 0.4, particleCount: 1000 };
+      case 4: return { colorScheme: 'purple-green', opacity: 0.35, particleCount: 800 };
+      case 7: return { colorScheme: 'blue-green', opacity: 0.35, particleCount: 900 };
+      case 9: return { colorScheme: 'purple-green', opacity: 0.35, particleCount: 900 };
+      case 10: return { colorScheme: 'blue-green', opacity: 0.35, particleCount: 900 };
+      case 12: return { colorScheme: 'purple-green', opacity: 0.3, particleCount: 800 };
+      case 13: return { colorScheme: 'green-white', opacity: 0.7, particleCount: 1500 };
+      default: return { colorScheme: null, opacity: 0, particleCount: 0 };
+    }
+  };
+
+  const bgConfig = getSlideConfig(currentSlide);
+
   return (
     <div className="w-screen h-[100dvh] bg-black overflow-hidden relative font-sans">
+      {/* Global Particle Background */}
+      <ParticleBackground
+        opacity={bgConfig.opacity}
+        particleCount={bgConfig.particleCount}
+        colorScheme={bgConfig.colorScheme as any}
+      />
+
       {/* Slide Container */}
       {/* Slide Container */}
       <AnimatePresence mode="wait" custom={direction}>

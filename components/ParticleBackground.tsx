@@ -4,7 +4,7 @@ import * as THREE from 'three';
 interface ParticleBackgroundProps {
   opacity?: number;
   particleCount?: number;
-  colorScheme?: 'purple-green' | 'blue' | 'green' | 'mono' | 'blue-green' | 'green-white';
+  colorScheme?: 'purple-green' | 'blue' | 'green' | 'mono' | 'blue-green' | 'green-white' | null;
 }
 
 interface ParticleData {
@@ -21,6 +21,8 @@ export const ParticleBackground: React.FC<ParticleBackgroundProps> = ({
   colorScheme = 'purple-green'
 }) => {
   const canvasRef = useRef<HTMLDivElement>(null);
+
+  if (!colorScheme) return null;
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -203,6 +205,13 @@ export const ParticleBackground: React.FC<ParticleBackgroundProps> = ({
       }
     };
   }, [opacity, particleCount, colorScheme]);
+
+  // Mobile optimization: Return static gradient instead of Canvas
+  if (typeof window !== 'undefined' && window.innerWidth < 768) {
+    return (
+      <div className="absolute inset-0 z-0 bg-gradient-to-b from-black via-zinc-900/50 to-black" />
+    );
+  }
 
   return (
     <div

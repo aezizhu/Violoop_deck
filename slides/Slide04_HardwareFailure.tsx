@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Icon } from '../components/Icon';
-import { ParticleBackground } from '../components/ParticleBackground';
 import { SlideHeader } from '../components/SlideHeader';
 
 const Slide04_HardwareFailure: React.FC = () => {
@@ -25,7 +24,7 @@ const Slide04_HardwareFailure: React.FC = () => {
   return (
     <div className="w-full h-full flex flex-col relative overflow-hidden px-4 md:px-8">
       {/* Particle Background */}
-      <ParticleBackground opacity={0.35} particleCount={800} colorScheme="purple-green" />
+
 
       {/* Header */}
       <SlideHeader chapter={1} titleEn="Hardware Failure" titleZh="硬件失败" badge="PROBLEM" />

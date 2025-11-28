@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Icon } from '../components/Icon';
-import { ParticleBackground } from '../components/ParticleBackground';
 import { SlideHeader } from '../components/SlideHeader';
 
 const Slide01_TheShift: React.FC = () => {
@@ -43,8 +42,10 @@ const Slide01_TheShift: React.FC = () => {
 
   return (
     <div className="w-full h-full flex flex-col relative overflow-hidden">
-      {/* Particle Background */}
-      <ParticleBackground opacity={0.4} particleCount={1000} colorScheme="purple-green" />
+      {/* Background */}
+      <div className="absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:50px_50px]" />
+      </div>
 
       {/* Header */}
       <SlideHeader chapter={1} titleEn="The Shift" titleZh="软件演进" badge="CONTEXT" />
