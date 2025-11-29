@@ -82,7 +82,7 @@ const Slide10_Market: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-full flex flex-col relative overflow-hidden">
+    <div className="w-full h-full flex flex-col relative overflow-y-auto">
       {/* Particle Background */}
 
 
@@ -99,11 +99,11 @@ const Slide10_Market: React.FC = () => {
       </div>
 
       {/* Main Content - Horizontal Timeline */}
-      <div className="flex-1 flex flex-col justify-center items-center px-4 md:px-8 z-10 overflow-x-auto">
+      <div className="flex-1 flex flex-col justify-start items-start md:justify-center md:items-center px-4 md:px-8 z-10 overflow-x-auto pt-8 md:pt-0">
         {/* Timeline Track */}
         <div className="relative min-w-[600px] md:min-w-0 max-w-5xl w-full">
           {/* Background Track */}
-          <div className="absolute top-[50px] md:top-[60px] left-0 right-0 h-1 bg-zinc-800">
+          <div className="absolute top-[40px] md:top-[60px] left-0 right-0 h-1 bg-zinc-800">
             {/* Animated progress */}
             <motion.div
               className="h-full bg-gradient-to-r from-green-500 via-teal-500 to-blue-500"
@@ -132,7 +132,7 @@ const Slide10_Market: React.FC = () => {
                 >
                   {/* Node */}
                   <motion.div
-                    className={`w-[80px] h-[80px] md:w-[120px] md:h-[120px] rounded-xl md:rounded-2xl flex flex-col items-center justify-center transition-all duration-300 ${isActive ? `${colors.bg} ${colors.glow}` : isPast ? 'bg-zinc-800' : 'bg-zinc-900 border-2 border-zinc-800'}`}
+                    className={`w-[80px] h-[80px] md:w-[120px] md:h-[120px] rounded-xl md:rounded-2xl flex flex-col items-center justify-center transition-all duration-300 shrink-0 ${isActive ? `${colors.bg} ${colors.glow}` : isPast ? 'bg-zinc-800' : 'bg-zinc-900 border-2 border-zinc-800'}`}
                     animate={{ scale: isActive ? 1.05 : 1 }}
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
@@ -146,7 +146,7 @@ const Slide10_Market: React.FC = () => {
 
                   {/* Phase Info Card */}
                   <motion.div
-                    className={`mt-3 md:mt-4 w-full max-w-[180px] md:max-w-[280px] p-2 md:p-4 rounded-xl transition-all duration-300 ${isActive ? `bg-zinc-900 border ${colors.border}/50 ${colors.glow}` : 'bg-zinc-900/50 border border-zinc-800'}`}
+                    className={`mt-6 md:mt-8 w-full max-w-[180px] md:max-w-[280px] p-2 md:p-4 rounded-xl transition-all duration-300 ${isActive ? `bg-zinc-900 border ${colors.border}/50 ${colors.glow}` : 'bg-zinc-900/50 border border-zinc-800'}`}
                     animate={{ opacity: isActive ? 1 : 0.6 }}
                     transition={{ duration: 0.5, ease: "easeInOut" }}
                   >
